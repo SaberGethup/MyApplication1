@@ -1,0 +1,70 @@
+package com.example.helloword;
+
+import android.annotation.SuppressLint;
+import android.annotation.TargetApi;
+import android.app.Activity;
+import android.app.Notification;
+import android.app.Notification.Builder;
+import android.app.NotificationManager;
+import android.content.Context;
+import android.graphics.BitmapFactory;
+import android.os.Build;
+import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.Button;
+
+public class MainActivity extends Activity implements OnClickListener{
+	private Button show;
+	private Button vanish;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        //¿Ø¼þ³õÊ¼»¯
+        inintView();
+    }
+/**
+ * *¿Ø¼þ³õÊ¼»¯²Ù×÷
+ */
+	private void inintView() {
+		// TODO Auto-generated method stub
+		 show=(Button) findViewById(R.id.show_bt);
+		 vanish=(Button) findViewById(R.id.vanish_bt);
+		 show.setOnClickListener(this);
+		 vanish.setOnClickListener(this);
+		
+	}
+	@TargetApi(Build.VERSION_CODES.JELLY_BEAN) @SuppressLint("NewApi") public void onClick(View view){
+		switch (view.getId()){
+		case R.id.vanish_bt:
+		//NotificationManager¶ÔÏó£¬¶ÔNotification½øÐÐ¹ÜÀí
+			   NotificationManager nm=(NotificationManager)getSystemService(Context.NOTIFICATION_SERVICE); 
+			//Í¨¹ýnewÀ´´´½¨Notification¶ÔÏóÒÑ¾­±»ÌÔÌ­ÁË
+			//Notification notification=new Notification();
+			//Õâ¸ö•½•¨ÔÚÀÏ°æ±¾µÄ°²×¿3.0ÒÔÇ°µÄÊÖ»úÔËÐÐ»á³ö´í
+			Notification notification=new Notification.Builder(this)
+			.setContentTitle("11111")
+			.setContentText("2222222")
+			.setSmallIcon(R.drawable.ic_launcher)
+			.setLargeIcon(BitmapFactory.decodeResource(getResources(), R.drawable.img01))
+			.setDefaults(Notification.DEFAULT_ALL)
+			//µ±Í¨ÖªÀ¸ÀïµÄÌáÊ¾µ½À´Ê±±»µã»÷»áÏûÊ§ÔÚÍ¨ÖªÀ¸
+			.setAutoCancel(true)
+			
+			.build();
+			
+			
+			nm.notify(1, notification);
+			
+			
+			break;
+		case R.id.show_bt:
+			break;
+		}
+	}
+}
+
